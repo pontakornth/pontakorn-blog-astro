@@ -6,6 +6,20 @@
 
 /* The original is kept as a reference */
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply font-heading font-bold;
+}
+
+/* Please override this if you don't need it */
+main {
+	@apply lg:w-2/3 p-8;
+}
+
 /*
 body {
 	font-family: Verdana, sans-serif;
