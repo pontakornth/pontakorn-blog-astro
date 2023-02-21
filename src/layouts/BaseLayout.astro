@@ -1,5 +1,7 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
+import "@fontsource/ibm-plex-sans-thai";
+import "@fontsource/ibm-plex-sans-thai-looped";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
@@ -36,7 +38,7 @@ const navbarItems = [
               >
             </label>
           </div>
-          <div class="flex-1 px-2 mx-2">{SITE_TITLE}</div>
+          <div class="flex-1 px-2 mx-2"><a href="/">{SITE_TITLE}</a></div>
           <div class="flex-none hidden lg:block">
             <ul class="menu menu-horizontal">
               <!-- Navbar menu content here -->
