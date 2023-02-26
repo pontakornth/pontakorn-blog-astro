@@ -18,4 +18,18 @@ const { Content } = await post.render();
 <BlogPost {...post.data}>
   <h1 class="not-prose text-4xl font-bold">{post.data.title}</h1>
   <Content />
+  <h2 class="not-prose text-2xl font-bold">Tags</h2>
+  {
+    post.data.tags ? (
+      <div class="flex gap-2">
+        {post.data.tags.map((tag) => (
+          <a class="" href={`/tags/${tag}`}>
+            {tag}
+          </a>
+        ))}
+      </div>
+    ) : (
+      <p class="text-base-300">There is no tag.</p>
+    )
+  }
 </BlogPost>
