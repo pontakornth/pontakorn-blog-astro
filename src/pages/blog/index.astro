@@ -6,6 +6,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "../../components/FormattedDate.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Post from "../../components/Post.astro";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
@@ -13,18 +14,16 @@ const posts = (await getCollection("blog")).sort(
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="p-8">
-    <h1 class="text-4xl font-bold text-center">Blog post</h1>
-    <ul>
+  <main class="p-8 mx-auto w-full lg:w-2/3">
+    <h1 class="text-4xl font-bold text-center mb-8">Blog post</h1>
+    <div class="grid grid-cols-2 gap-8">
       {
         posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}`}>
-              {post.data.title} - <FormattedDate date={post.data.pubDate} />
+            <a class="hover:scale-105" href={`/blog/${post.slug}`}>
+              <Post title={post.data.title} description={post.data.description} image={post.data.heroImage} / >
             </a>
-          </li>
         ))
       }
-    </ul>
+    </div>
   </main>
 </BaseLayout>
