@@ -1,18 +1,45 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import Post from "../components/Post.astro";
+const posts = (await getCollection("blog")).sort(
+  // Latest show first
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const latestThreePosts = posts.slice(0, 3);
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-  <main class="p-8 text-center space-y-8 m-auto">
-    <h1 class="text-4xl font-bold">{SITE_TITLE}</h1>
-    <p class="text-3xl font-semibold">{SITE_DESCRIPTION}</p>
-    <div class="flex flex-col lg:flex-row justify-center gap-4">
-      <a href="/blog" class="btn btn-primary">My blog posts</a>
-      <a href="/tags" class="btn btn-info">All tags</a>
-      <a href="/about" class="btn btn-info">About myself</a>
-      <a href="https://blog.pontakorn.dev" class="btn btn-info">Hashnode Blog</a
-      >
+  <main class="p-8 space-y-8 m-auto">
+    <div class="space-y-8 text-center">
+      <h1 class="text-4xl font-bold">{SITE_TITLE}</h1>
+      <p class="text-3xl font-semibold">{SITE_DESCRIPTION}</p>
+      <div class="flex flex-col lg:flex-row justify-center gap-4">
+        <a href="/blog" class="btn btn-primary">My blog posts</a>
+        <a href="/tags" class="btn btn-info">All tags</a>
+        <a href="/about" class="btn btn-info">About myself</a>
+        <a href="https://blog.pontakorn.dev" class="btn btn-info"
+          >Hashnode Blog</a
+        >
+      </div>
+    </div>
+    <div class="space-y-8">
+      <h1 class="text-center text-3xl font-bold">Latest Posts</h1>
+      <div class="grid grip-cols-1 gap-8 lg:grid-cols-3">
+        {
+          latestThreePosts.map((post) => (
+            <a href={`/blog/${post.slug}`}>
+              <Post
+                title={post.data.title}
+                description={post.data.description}
+                image={post.data.heroImage}
+                pubDate={post.data.pubDate}
+              />
+            </a>
+          ))
+        }
+      </div>
     </div>
   </main>
 </BaseLayout>
