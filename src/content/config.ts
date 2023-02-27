@@ -15,7 +15,8 @@ const blog = defineCollection({
       .optional()
       .transform((str) => (str ? new Date(str) : undefined)),
     heroImage: z.string().optional(),
-    tags: z.array(z.string()).optional(),
+    // force tags to be lowercase
+    tags: z.array(z.string().transform((x) => x.toLowerCase())).optional(),
   }),
 });
 
