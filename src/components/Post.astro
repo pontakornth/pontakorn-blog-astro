@@ -1,12 +1,15 @@
 ---
+import FormattedDate from "./FormattedDate.astro";
+
 export interface Props {
   title: string;
   description?: string;
   image?: string;
   imageAlt?: string;
+  pubDate?: Date;
 }
 
-const { image, title, description, imageAlt = "" } = Astro.props;
+const { image, title, description, imageAlt = "", pubDate } = Astro.props;
 ---
 
 <div class="card card-bordered">
@@ -20,5 +23,6 @@ const { image, title, description, imageAlt = "" } = Astro.props;
   <div class="card-body bg-base-200">
     <h2 class="card-title">{title}</h2>
     {description && <p>{description}</p>}
+    {pubDate && <FormattedDate date={pubDate} />}
   </div>
 </div>

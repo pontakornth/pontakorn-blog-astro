@@ -1,16 +1,13 @@
 ---
-import BaseHead from "../../components/BaseHead.astro";
-import Header from "../../components/Header.astro";
-import Footer from "../../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../../consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "../../components/FormattedDate.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Post from "../../components/Post.astro";
 
 // TODO: Pagination
 const posts = (await getCollection("blog")).sort(
-  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+  // Latest show first
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
 
@@ -21,7 +18,7 @@ const posts = (await getCollection("blog")).sort(
       {
         posts.map((post) => (
             <a class="hover:scale-105" href={`/blog/${post.slug}`}>
-              <Post title={post.data.title} description={post.data.description} image={post.data.heroImage} / >
+              <Post pubDate={post.data.pubDate } title={post.data.title} description={post.data.description} image={post.data.heroImage} / >
             </a>
         ))
       }
