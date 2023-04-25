@@ -17,15 +17,15 @@ const Quiz: Component<Props> = (props) => {
     }
   };
   return (
-    <div class="card shadow-xl">
+    <div class="not-prose card shadow-xl">
       <div class="card-body">
         <h3>{props.title}</h3>
-        <div class="p-8 space-y-8">
+        <div class="space-y-8 p-8">
           <For each={props.choices}>
             {(choice, index) => (
               <button
                 onClick={[answer, index()]}
-                class="btn w-full btn-active"
+                class="btn-active btn w-full"
                 classList={{
                   "btn-error":
                     index() == answerIndex() && index() != props.correctIndex,
