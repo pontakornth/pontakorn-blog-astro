@@ -32,7 +32,7 @@ const {tag, posts} = Astro.props;
       {
         posts.map((post) => (
             <a class="hover:scale-105" href={`/blog/${post.slug}`}>
-              <Post title={post.data.title} description={post.data.description} image={post.data.heroImage} / >
+              <Post title={post.data.title} description={post.data.description} image={post.data.heroImage} />
             </a>
         ))
       }
