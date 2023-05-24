@@ -4,6 +4,7 @@ import "@fontsource/ibm-plex-sans-thai";
 import "@fontsource/ibm-plex-sans-thai-looped";
 
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Webring from "@components/Webring.astro";
 const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 const navbarItems = [
   { text: "Blog", href: "/blog" },
@@ -49,6 +50,9 @@ const navbarItems = [
                   </li>
                 ))
               }
+              <li>
+                <Webring />
+              </li>
             </ul>
           </div>
         </div>
@@ -66,6 +70,9 @@ const navbarItems = [
               </li>
             ))
           }
+          <li>
+            <Webring />
+          </li>
         </ul>
       </div>
     </div>
